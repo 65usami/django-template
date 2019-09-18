@@ -1,0 +1,1 @@
+from app.models.sample_model import SampleTable
