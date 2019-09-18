@@ -21,6 +21,15 @@ https://stackoverflow.com/questions/17803829/how-to-customize-a-requirements-txt
 
 python manage.py test
 
+uWSGI
+
+uwsgi uwsgi.ini 
+#uwsgi uwsgi.ini --logger file:/tmp/uwsgi.log
+#uwsgi uwsgi.ini --logger file:/tmp/uwsgi.log --pidfile /tmp/uwsgi.pid
+#uwsgi uwsgi.ini --stats 127.0.0.1:9191
+
+https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
+
 アイディア
 
 django redis
