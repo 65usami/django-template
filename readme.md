@@ -38,17 +38,17 @@ $ docker-compose run uwsgi ./manage.py makemigrations app
 
 ## Apply your project
 
-1. プロジェクト名(django-template)変更
+**1. プロジェクト名(django-template)変更**
 
 docker-compose.ymlの `django-template` を別のプロジェクト名に変更する。
 
 トップディレクトリ(django-template)を同様のプロジェクト名に変更する。
 
-2. ALLOWED_HOSTS
+**2. ALLOWED_HOSTS**
 
 デフォルトは`settings.py`に`ALLOWED_HOSTS = ['*']`としている。適切な設定(指定IPアドレス等)を適用。
 
-3. MySQL
+**3. MySQL**
 
 デフォルトのDB名、ユーザー名等、全て`django`となっている。
 下記を適切な設定に変更する。
@@ -57,7 +57,7 @@ docker-compose.ymlの `django-template` を別のプロジェクト名に変更�
     - django-template/config/settings.py
     - mysql/sql/init.sql
 
-## Installation for Ubuntu 16.0.4 LTS
+## Docker Installation for Ubuntu 16.0.4 LTS
 ```
 # Docker installation
 $ sudo apt-get update
