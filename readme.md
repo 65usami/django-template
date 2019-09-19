@@ -32,8 +32,8 @@ $ docker-compose up -d
 - マイグレーション
 
 ```
-$ docker-compose run uwsgi ./manage.py migrate
-$ docker-compose run uwsgi ./manage.py makemigrations app
+$ docker-compose run web ./manage.py migrate
+$ docker-compose run web ./manage.py makemigrations app
 ```
 
 ## Apply your project
