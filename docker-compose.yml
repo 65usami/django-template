@@ -43,6 +43,7 @@ services:
       - ./mysql/sql:/docker-entrypoint-initdb.d
 
   adminer:
+    restart: always
     image: adminer
     restart: always
     ports:
