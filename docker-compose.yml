@@ -18,8 +18,8 @@ services:
       - ./django-template:/django-app/
     ports:
       - "3033:3033"
-    # command: python manage.py migrate
-    # command: python manage.py makemigrations app
+    command: python manage.py makemigrations app
+    command: python manage.py migrate
     command: uwsgi uwsgi.ini --socket :3033
     environment:
       TZ: "Asia/Tokyo"
