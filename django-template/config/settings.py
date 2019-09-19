@@ -26,7 +26,7 @@ SECRET_KEY = '@x0w%x6t5%m*0l_++yztl7y1p0^&v)-+2*qcjyq(yf8vs7vf4d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # django-environ
 env = environ.Env()

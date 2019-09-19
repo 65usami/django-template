@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nginx:
+    restart: always
+    build: ./nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    links:
+      - uwsgi
+    ports:
+      - "80:80"
+    environment:
+      TZ: "Asia/Tokyo"
+
+  uwsgi:
+    restart: always
+    build: ./django-template
+    volumes:
+      - ./django-template:/django-app/
+    ports:
+      - "3033:3033"
+    command: uwsgi uwsgi.ini --socket :3033
+    environment:
+      TZ: "Asia/Tokyo"

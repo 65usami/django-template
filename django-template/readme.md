@@ -23,7 +23,7 @@ python manage.py test
 
 uWSGI
 
-uwsgi uwsgi.ini 
+uwsgi uwsgi.ini
 #uwsgi uwsgi.ini --logger file:/tmp/uwsgi.log
 #uwsgi uwsgi.ini --logger file:/tmp/uwsgi.log --pidfile /tmp/uwsgi.pid
 #uwsgi uwsgi.ini --stats 127.0.0.1:9191
