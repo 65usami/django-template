@@ -12,5 +12,3 @@ COPY requirements/production.txt /django-app/requirements/production.txt
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements/production.txt
 COPY . /django-app/
-RUN python manage.py migrate
-RUN python manage.py makemigrations app
