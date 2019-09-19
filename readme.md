@@ -12,9 +12,15 @@ Djangoプロジェクト開発用のテンプレート
 ## System
 
 - Python: 3.6.7
-- Nginx + uWSGI + Django + MySQL
+- Nginx
+- uWSGI
+- Django: 2.2.5
+- Redis: 3.3.8
+- MySQL: 8.0.17
 
 ## Usage
+
+### Operation
 
 - 起動
 
@@ -25,9 +31,33 @@ $ docker-compose up -d
 # http://localhost/
 ```
 
+- マイグレーション
+
+```
+$ docker-compose run uwsgi ./manage.py migrate
+$ docker-compose run uwsgi ./manage.py makemigrations app
+```
+
+### プロジェクトへの適用
+
 - プロジェクト名(django-template)変更
 
 docker-compose.ymlの `django-template` を別のプロジェクト名に変更する。
+
+トップディレクトリ(django-template)を同様のプロジェクト名に変更する。
+
+- ALLOWED_HOSTS
+
+デフォルトは`settings.py`に`ALLOWED_HOSTS = ['*']`としている。適切な設定(指定IPアドレス等)を適用。
+
+- MySQL
+
+デフォルトのDB名、ユーザー名等、全て`django`となっている。
+下記を適切な設定に変更する。
+
+    - docker-compose.yml
+    - django-template/config/settings.py
+    - mysql/sql/init.sql
 
 ## Installation for Ubuntu 16.0.4 LTS
 ```
@@ -82,9 +112,10 @@ $ python manage.py test
 - 参考
 
 https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
+
 https://github.com/akiyoko/django-book-mysite-sample
 
-
+https://qiita.com/kenkono/items/6221ad12670d1ae8b1dd
 
 ## License
 
@@ -93,4 +124,3 @@ MIT
 ##  Author
 
 Kenichi Usami
-
