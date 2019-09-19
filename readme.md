@@ -20,8 +20,6 @@ Djangoプロジェクト開発用のテンプレート
 
 ## Usage
 
-### Operation
-
 - 起動
 
 ```
@@ -38,19 +36,19 @@ $ docker-compose run uwsgi ./manage.py migrate
 $ docker-compose run uwsgi ./manage.py makemigrations app
 ```
 
-### プロジェクトへの適用
+## Apply your project
 
-- プロジェクト名(django-template)変更
+1. プロジェクト名(django-template)変更
 
 docker-compose.ymlの `django-template` を別のプロジェクト名に変更する。
 
 トップディレクトリ(django-template)を同様のプロジェクト名に変更する。
 
-- ALLOWED_HOSTS
+2. ALLOWED_HOSTS
 
 デフォルトは`settings.py`に`ALLOWED_HOSTS = ['*']`としている。適切な設定(指定IPアドレス等)を適用。
 
-- MySQL
+3. MySQL
 
 デフォルトのDB名、ユーザー名等、全て`django`となっている。
 下記を適切な設定に変更する。
@@ -82,9 +80,9 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ exit
 ```
 
-## Reference
+## Set-up Development env
 
-__開発環境マニュアル設定情報(Docker無し) for Mac__
+__開発環境設定(Docker無し) for Mac__
 
 
 - インストール
@@ -109,7 +107,7 @@ $ uwsgi uwsgi.ini --http :3033 --stats 127.0.0.1:9191
 $ python manage.py test
 ```
 
-- 参考
+## Reference
 
 https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
 
