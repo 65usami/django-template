@@ -1,2 +1,1 @@
 -r base.txt
-uWSGI==2.0.17

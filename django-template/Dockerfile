@@ -7,8 +7,9 @@ RUN apt install -y build-essential gcc clang
 RUN mkdir /django-app
 RUN mkdir /django-app/requirements
 WORKDIR /django-app
+ARG REQUIREMENT_TXT
 COPY requirements/base.txt /django-app/requirements/base.txt
-COPY requirements/production.txt /django-app/requirements/production.txt
+COPY requirements/${REQUIREMENT_TXT} /django-app/requirements/${REQUIREMENT_TXT}
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements/production.txt
+RUN pip install --no-cache-dir -r requirements/${REQUIREMENT_TXT}
 COPY . /django-app/
