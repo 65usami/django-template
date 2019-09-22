@@ -23,11 +23,13 @@ Djangoプロジェクト開発用のテンプレート
 - 起動
 
 ```
+$ export REQUIREMENT_TXT=development.txt
 $ docker-compose up -d
 
 # 確認
 # http://localhost/
 ```
+> REQUIREMENT_TXT: development.txt, staging.txt, production.txt, text.txt
 
 - マイグレーション
 
@@ -58,63 +60,17 @@ docker-compose.ymlの `django-template` を別のプロジェクト名に変更�
     - mysql/sql/init.sql
 
 ## Docker Installation for Ubuntu 16.0.4 LTS
-```
-# Docker installation
-$ sudo apt-get update
-$ sudo apt-get install -y git apt-transport-https ca-certificates curl software-properties-common
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-$ sudo apt-get update
-$ sudo apt-get install -y docker-ce
-
-# Add user to docker group
-$ sudo usermod -aG docker ubuntu
-
-# Once exit
-$ exit
-
-# docker-compose installation
-$ sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-$ sudo chmod +x /usr/local/bin/docker-compose
-$ exit
-```
+[Docker Installation for Ubuntu 16.0.4 LTS](https://github.com/65usami/django-template/wiki/Docker-Installation-for-Ubuntu-16.0.4-LTS)
 
 ## Set-up Development env
 
-__開発環境設定(Docker無し) for Mac__
+[開発環境設定(Docker無し) for Mac](https://github.com/65usami/django-template/wiki/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A(Docker%E7%84%A1%E3%81%97)-for-Mac)
 
-- MySQLのインストール
-
-- インストール
-```
-$ cd django-template
-$ pip install --upgrade pip
-$ pip install --no-cache-dir -r requirements/development.txt
-$ python manage.py migrate
-$ python manage.py makemigrations app
-```
-
-- 起動
-```
-$ uwsgi uwsgi.ini --http :3033 --stats 127.0.0.1:9191
-
-# 確認
-# http://localhost:3033/
-```
-
-- テストコード実行
-```
-$ python manage.py test
-```
 
 ## Reference
 
-https://github.com/akiyoko/django-book-mysite-sample
-
-https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html
-
-https://qiita.com/kenkono/items/6221ad12670d1ae8b1dd
+[References](https://github.com/65usami/django-template/wiki/References)
 
 ## License
 
