@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
   nginx:
@@ -40,7 +40,9 @@ services:
       MYSQL_PASSWORD: django
       TZ: 'Asia/Tokyo'
     volumes:
-      - mysqlvolume:/usr/local/var/mysql_data
+      - type: volume
+        source: mysqlvolume
+        target: /var/lib/mysql
       - ./mysql/sql:/docker-entrypoint-initdb.d
 
   adminer:
@@ -53,5 +55,7 @@ services:
       - db
 
 volumes:
-    mysqlvolume:
+  mysqlvolume:
+    driver: local
+
 
