@@ -1,1 +1,1 @@
-import app.views.sample_view
+from . import sample_view

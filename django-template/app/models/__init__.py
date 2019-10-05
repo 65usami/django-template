@@ -1,1 +1,1 @@
-from app.models.sample_model import SampleTable
+from . import sample_model
