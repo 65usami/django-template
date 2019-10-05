@@ -59,13 +59,13 @@ docker-compose.ymlの `django-template` を別のプロジェクト名に変更�
     - django-template/config/settings.py
     - mysql/sql/init.sql
 
-## Docker Installation for Ubuntu 16.0.4 LTS
+## Docker Installation for Ubuntu
 
-[Docker Installation for Ubuntu 16.0.4 LTS](https://github.com/65usami/django-template/wiki/Docker-Installation-for-Ubuntu-16.0.4-LTS)
+[Docker Installation for Ubuntu](https://github.com/65usami/django-template/wiki/Docker-Installation-for-Ubuntu)
 
 ## Set-up Development env
 
-[開発環境設定(Docker無し) for Mac](https://github.com/65usami/django-template/wiki/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A(Docker%E7%84%A1%E3%81%97)-for-Mac)
+[開発環境構築(Docker無し) for Mac](https://github.com/65usami/django-template/wiki/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89(Docker%E7%84%A1%E3%81%97)-for-Mac)
 
 
 ## Reference
