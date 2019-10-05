@@ -7,7 +7,7 @@ Djangoプロジェクト開発用のテンプレート
 ## Requirements
 
 - Docker: 19.03.2
-    - docker-compose: 3.7.3
+    - docker-compose: 1.24.1
 
 ## System
 
