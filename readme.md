@@ -11,7 +11,7 @@ Djangoプロジェクト開発用のテンプレート
 
 ## System
 
-- Python: 3.6.7
+- Python: 3.7.4
 - Nginx
 - uWSGI
 - Django: 2.2.5
