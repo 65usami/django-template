@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from.views.sample_view import MyFormView
 
 urlpatterns = [
-    path('', views.sample_view.index, name='index'),
+    path('', MyFormView.as_view(), name='index'),
 ]
