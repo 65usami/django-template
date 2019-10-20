@@ -26,6 +26,12 @@ SECRET_KEY = '@x0w%x6t5%m*0l_++yztl7y1p0^&v)-+2*qcjyq(yf8vs7vf4d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# CSRF
+# If you think Ajax and security, Refer to: https://docs.djangoproject.com/en/2.2/ref/csrf/
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False
+
+
 ALLOWED_HOSTS = ['*']
 
 # django-environ
