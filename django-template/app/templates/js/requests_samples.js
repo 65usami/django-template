@@ -72,6 +72,36 @@ const async_post = async (url, json_params = "") => {
   });
 };
 
+const async_post_file = async (url, upload_data) => {
+  const csrftoken = getCookie_();
+  $.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+      if (!csrfSafeMethod_(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  });
+
+  return await new Promise(function(resolve, reject) {
+    $.ajax({
+      type: "post",
+      url: url,
+      timeout: 120000,
+      cache: false,
+      processData: false,
+      contentType: false,
+      data: upload_data
+    })
+      .done(function(data, textStatus, jqXHR) {
+        resolve(data, textStatus, jqXHR);
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        reject(jqXHR, textStatus, errorThrown);
+      });
+  });
+};
+
+
 //// Examples
 
 // const json_params = {
@@ -105,6 +135,36 @@ const async_post = async (url, json_params = "") => {
 // };
 
 // async_post(url, json_params)
+// .then((data, textStatus, jqXHR) => {
+//         console.log("@success");
+//         console.log("@resolve");
+//         console.log(data);
+//     }, (jqXHR, textStatus, errorThrown) => {
+//         console.log("@success");
+//         console.log("@reject");
+//         console.error(jqXHR);
+// })
+// .catch((error) => {
+//     console.log("@error");
+//     console.log(error);
+// })
+// .finally(() => {
+//     console.log("@finally");
+// });
+
+//// Examples: upload file
+
+// // HTML
+// <form action="/upload/" method="post" id="file-upload-form" enctype="multipart/form-data"> {% csrf_token %}
+//     {{ form }}
+//     <button type="submit" class="btn btn-primary" id='upload-btn'>Upload</button>
+// </form>
+
+// // JS
+// event.preventDefault();
+// const upload_data = new FormData($('form').get(0));
+
+// async_post_file(url, upload_data)
 // .then((data, textStatus, jqXHR) => {
 //         console.log("@success");
 //         console.log("@resolve");
