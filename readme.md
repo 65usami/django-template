@@ -28,7 +28,6 @@ $ docker-compose up -d
 # 確認
 # http://localhost/
 ```
-> REQUIREMENT_TXT: development.txt, staging.txt, production.txt, text.txt
 
 - マイグレーション
 
