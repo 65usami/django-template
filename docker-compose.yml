@@ -11,6 +11,8 @@ services:
       - "80:80"
     environment:
       TZ: "Asia/Tokyo"
+    depends_on:
+      - web
 
   web:
     restart: always
@@ -22,11 +24,15 @@ services:
       - ./django-template:/django-app/
     ports:
       - "3033:3033"
-    command: uwsgi uwsgi.ini --socket :3033
+    command: >
+      bash -c "python manage.py migrate --noinput &&
+      python manage.py makemigrations app &&
+      uwsgi uwsgi.ini --socket :3033"
     environment:
       TZ: "Asia/Tokyo"
     depends_on:
       - db
+      - redis
 
   db:
     restart: always
@@ -56,9 +62,12 @@ services:
       - db
 
   redis:
+    restart: always
     image: redis
     ports:
       - 6379:6379
+    environment:
+      TZ: "Asia/Tokyo"
 
 volumes:
   mysqlvolume:
