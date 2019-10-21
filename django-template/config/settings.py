@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import environ
 
+# django-environ
+env = environ.Env()
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -26,16 +28,17 @@ SECRET_KEY = '@x0w%x6t5%m*0l_++yztl7y1p0^&v)-+2*qcjyq(yf8vs7vf4d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['*']
+
 # CSRF
 # If you think Ajax and security, Refer to: https://docs.djangoproject.com/en/2.2/ref/csrf/
 CSRF_USE_SESSIONS = False
 CSRF_COOKIE_HTTPONLY = False
 
-
-ALLOWED_HOSTS = ['*']
-
-# django-environ
-env = environ.Env()
+# Celery
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'django-cache'
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 
 # Application definition
 
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    'django_celery_beat',
     'app.apps.AppConfig',
 ]
 

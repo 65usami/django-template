@@ -7,6 +7,7 @@
 $(document).ready(() => {
 
     url = 'http://localhost/api/data';
+    url_task = 'http://localhost/api/task';
 
     $('.btn-get-request').click(() => {
         async_get(url)
@@ -28,6 +29,21 @@ $(document).ready(() => {
         .then((data, textStatus, jqXHR) => {
             console.log(data);
             alert(data.data);
+        }, (jqXHR, textStatus, errorThrown) => {
+            console.log(jqXHR);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+        });
+    })
+
+    $('.btn-get-request-task').click(() => {
+        async_get(url_task)
+        .then((data, textStatus, jqXHR) => {
+            console.log(data);
+            alert(JSON.stringify(data));
         }, (jqXHR, textStatus, errorThrown) => {
             console.log(jqXHR);
         })
@@ -60,6 +76,13 @@ Sample template
 <br>
 
 <button type="button" class="btn btn-warning btn-post-request">POST request</button>
+
+<br>
+<br>
+<br>
+<br>
+
+<button type="button" class="btn btn-secondary btn-get-request-task">GET via Redis + Celery</button>
 
 <br>
 <br>
