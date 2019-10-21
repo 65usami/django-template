@@ -6,7 +6,11 @@ RUN apt install -y build-essential gcc clang
 RUN mkdir /django-app
 RUN mkdir /django-app/requirements
 WORKDIR /django-app
+ARG REDIS_URL
+ARG DATABASE_HOST
 ARG REQUIREMENT_TXT
+ENV REDIS_URL ${REDIS_URL}
+ENV DATABASE_HOST ${DATABASE_HOST}
 COPY requirements/base.txt /django-app/requirements/base.txt
 COPY requirements/${REQUIREMENT_TXT} /django-app/requirements/${REQUIREMENT_TXT}
 RUN pip install --upgrade pip

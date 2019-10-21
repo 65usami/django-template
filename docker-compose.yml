@@ -12,14 +12,20 @@ services:
     environment:
       TZ: "Asia/Tokyo"
     depends_on:
+      - redis
+      - db
       - web
+      - web-celery-worker
+      - web-celery-beat
 
   web:
     restart: always
     build:
       context: ./django-template
       args:
-        - REQUIREMENT_TXT=$REQUIREMENT_TXT
+        - REQUIREMENT_TXT=production.txt
+        - DATABASE_HOST=db
+        - REDIS_URL=redis
     volumes:
       - ./django-template:/django-app/
     ports:
@@ -30,6 +36,36 @@ services:
       uwsgi uwsgi.ini --socket :3033"
     environment:
       TZ: "Asia/Tokyo"
+    depends_on:
+      - redis
+      - db
+      - web-celery-worker
+      - web-celery-beat
+
+  web-celery-worker:
+    build:
+      context: ./django-template
+      args:
+        - REQUIREMENT_TXT=production.txt
+        - DATABASE_HOST=db
+        - REDIS_URL=redis
+    command: celery -A config worker -l info
+    volumes:
+      - ./django-template:/django-app/
+    depends_on:
+      - db
+      - redis
+
+  web-celery-beat:
+    build:
+      context: ./django-template
+      args:
+        - REQUIREMENT_TXT=production.txt
+        - DATABASE_HOST=db
+        - REDIS_URL=redis
+    command: celery -A config beat -l info --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - ./django-template:/django-app/
     depends_on:
       - db
       - redis

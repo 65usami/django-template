@@ -38,7 +38,9 @@ CSRF_COOKIE_HTTPONLY = False
 # Celery
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'django-cache'
-CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+REDIS_URL = os.environ.get('REDIS_URL', 'localhost')
+CELERY_BROKER_URL = 'redis://' + REDIS_URL + ':6379/0'
+
 
 # Application definition
 
@@ -88,13 +90,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+DATABASE_HOST = os.environ.get('DATABASE_HOST', 'localhost')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django',
         'USER': 'django',
         'PASSWORD': 'django',
-        'HOST': 'db',
+        'HOST': DATABASE_HOST,
         'PORT': 3306,
     }
 }
