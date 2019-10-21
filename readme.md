@@ -23,7 +23,6 @@ Djangoプロジェクト開発用のテンプレート
 - 起動
 
 ```
-$ export REQUIREMENT_TXT=development.txt
 $ docker-compose up -d
 
 # 確認
