@@ -11,12 +11,6 @@ services:
       - "80:80"
     environment:
       TZ: "Asia/Tokyo"
-    depends_on:
-      - redis
-      - db
-      - web
-      - web-celery-worker
-      - web-celery-beat
 
   web:
     restart: always
@@ -31,16 +25,16 @@ services:
     ports:
       - "3033:3033"
     command: >
-      bash -c "python manage.py migrate --noinput &&
-      python manage.py makemigrations app &&
-      uwsgi uwsgi.ini --socket :3033"
+      bash -c "chmod 777 ./db_healthchecker.sh &&
+        ./db_healthchecker.sh &&
+        python manage.py migrate --noinput &&
+        python manage.py makemigrations app &&
+        uwsgi uwsgi.ini --socket :3033"
     environment:
       TZ: "Asia/Tokyo"
     depends_on:
       - redis
       - db
-      - web-celery-worker
-      - web-celery-beat
 
   web-celery-worker:
     build:
@@ -49,11 +43,14 @@ services:
         - REQUIREMENT_TXT=production.txt
         - DATABASE_HOST=db
         - REDIS_URL=redis
-    command: celery -A config worker -l info
+    command: >
+      bash -c "chmod 777 ./db_healthchecker.sh &&
+        ./db_healthchecker.sh &&
+        celery -A config worker -l info"
     volumes:
       - ./django-template:/django-app/
     depends_on:
-      - db
+      - web
       - redis
 
   web-celery-beat:
@@ -63,11 +60,15 @@ services:
         - REQUIREMENT_TXT=production.txt
         - DATABASE_HOST=db
         - REDIS_URL=redis
-    command: celery -A config beat -l info --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    command: >
+      bash -c "chmod 777 ./db_healthchecker.sh &&
+        ./db_healthchecker.sh &&
+        celery -A config beat -l info --pidfile /tmp/celerybeat.pid --scheduler django_celery_beat.schedulers:DatabaseScheduler"
     volumes:
       - ./django-template:/django-app/
     depends_on:
-      - db
+      - web
+      - web-celery-worker
       - redis
 
   db:
@@ -76,17 +77,19 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
-    environment:
-      MYSQL_DATABASE: django
-      MYSQL_ROOT_PASSWORD: django
-      MYSQL_USER: django
-      MYSQL_PASSWORD: django
-      TZ: 'Asia/Tokyo'
     volumes:
       - type: volume
         source: mysqlvolume
         target: /var/lib/mysql
       - ./mysql/sql:/docker-entrypoint-initdb.d
+      - ./mysql/entrypoint.sh:/tmp/entrypoint.sh
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: django
+      MYSQL_ROOT_PASSWORD: django
+      MYSQL_USER: django
+      MYSQL_PASSWORD: django
+      TZ: 'Asia/Tokyo'
 
   adminer:
     restart: always
@@ -108,5 +111,3 @@ services:
 volumes:
   mysqlvolume:
     driver: local
-
-

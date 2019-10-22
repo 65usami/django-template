@@ -3,6 +3,7 @@ ENV PYTHONIOENCODING utf-8
 ENV PYTHONBUFFER 1
 RUN apt update
 RUN apt install -y build-essential gcc clang
+RUN apt install -y default-mysql-client
 RUN mkdir /django-app
 RUN mkdir /django-app/requirements
 WORKDIR /django-app
