@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This is database helth check by manage.py for Docker (docker-compose)
+
 retry_counter=10
 is_result=0
 exit_code=1
