@@ -37,6 +37,7 @@ services:
       - db
 
   web-celery-worker:
+    restart: always
     build:
       context: ./django-template
       args:
@@ -54,6 +55,7 @@ services:
       - redis
 
   web-celery-beat:
+    restart: always
     build:
       context: ./django-template
       args:
@@ -68,7 +70,6 @@ services:
       - ./django-template:/django-app/
     depends_on:
       - web
-      - web-celery-worker
       - redis
 
   db:
