@@ -8,6 +8,7 @@ $(document).ready(() => {
 
     url = 'http://localhost/api/data';
     url_task = 'http://localhost/api/task';
+    url_mongodb = 'http://localhost/api/mongodb';
 
     $('.btn-get-request').click(() => {
         async_get(url)
@@ -54,6 +55,21 @@ $(document).ready(() => {
         });
     })
 
+    $('.btn-get-request-mongodb').click(() => {
+        async_get(url_mongodb)
+        .then((data, textStatus, jqXHR) => {
+            console.log(data);
+            alert(JSON.stringify(data));
+        }, (jqXHR, textStatus, errorThrown) => {
+            console.log(jqXHR);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .finally(() => {
+        });
+    })
+
 });
 </script>
 
@@ -76,6 +92,13 @@ Sample template
 <br>
 
 <button type="button" class="btn btn-warning btn-post-request">POST request</button>
+
+<br>
+<br>
+<br>
+<br>
+
+<button type="button" class="btn btn-primary btn-get-request-mongodb">Get via mongodb</button>
 
 <br>
 <br>
