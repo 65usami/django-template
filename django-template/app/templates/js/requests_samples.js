@@ -1,5 +1,5 @@
-const async_get = async (url, json_params = "") => {
-  return await new Promise(function(resolve, reject) {
+const async_get = (url, json_params = "") => {
+  return new Promise(function(resolve, reject) {
     $.ajax({
       type: "get",
       url: url,
@@ -43,7 +43,7 @@ const getCookie_ = () => {
   return cookieValue;
 };
 
-const async_post = async (url, json_params = "") => {
+const async_post = (url, json_params = "") => {
   const csrftoken = getCookie_();
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
@@ -53,7 +53,7 @@ const async_post = async (url, json_params = "") => {
     }
   });
 
-  return await new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     $.ajax({
       type: "post",
       url: url,
@@ -72,7 +72,7 @@ const async_post = async (url, json_params = "") => {
   });
 };
 
-const async_post_file = async (url, upload_data) => {
+const async_post_file = (url, upload_data) => {
   const csrftoken = getCookie_();
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
@@ -82,7 +82,7 @@ const async_post_file = async (url, upload_data) => {
     }
   });
 
-  return await new Promise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     $.ajax({
       type: "post",
       url: url,
