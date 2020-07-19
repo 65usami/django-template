@@ -2,7 +2,7 @@
 
 ## Feature
 
-Djangoプロジェクト開発用のテンプレート
+Djangoプロジェクトサンプル
 
 ## Requirements
 
